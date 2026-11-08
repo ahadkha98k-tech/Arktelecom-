@@ -109,7 +109,7 @@ footer a{color:var(--gold);font-weight:700;text-decoration:none}
 #cur.h{width:62px;height:62px;margin:-31px 0 0 -31px;background:rgba(232,200,114,.25)}
 @media (hover:none){#cur{display:none}}
 @media (hover:hover){body.fine,body.fine a,body.fine button{cursor:none}}
-#kb{position:fixed;right:18px;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:60;border:0;border-radius:99px;padding:13px 18px;background:var(--ink);color:var(--gold2);font:700 14px 'DM Sans',sans-serif;box-shadow:0 12px 30px -10px rgba(0,0,0,.5),0 0 0 1px rgba(232,200,114,.5)}
+#kb{position:fixed;right:16px;bottom:calc(var(--ab,0px) + env(safe-area-inset-bottom,0px) + 18px);z-index:60;white-space:nowrap;transition:bottom .6s cubic-bezier(.2,1.2,.3,1);border:0;border-radius:99px;padding:13px 18px;background:var(--ink);color:var(--gold2);font:700 14px 'DM Sans',sans-serif;box-shadow:0 12px 30px -10px rgba(0,0,0,.5),0 0 0 1px rgba(232,200,114,.5)}
 #pal{position:fixed;inset:0;z-index:9999;background:rgba(27,23,16,.45);backdrop-filter:blur(10px);display:none;align-items:flex-start;justify-content:center;padding:14vh 16px 0}
 #pal.on{display:flex}
 #pal .box{width:100%;max-width:560px;background:rgba(255,255,255,.92);border-radius:22px;box-shadow:0 40px 80px -20px rgba(0,0,0,.55),0 0 0 1px var(--gold2),0 0 60px -10px rgba(232,200,114,.7);overflow:hidden;animation:pop .28s cubic-bezier(.2,.9,.3,1.2)}
@@ -124,13 +124,13 @@ footer a{color:var(--gold);font-weight:700;text-decoration:none}
 </style>
 <style id="shop">
 .nr{display:flex;align-items:center;gap:10px}
-.cartbtn{border:0;border-radius:99px;padding:12px 18px;background:var(--ink);color:var(--gold2);font:700 15px 'DM Sans',sans-serif;box-shadow:0 0 0 1px rgba(232,200,114,.5)}
+.cartbtn{position:fixed;left:16px;bottom:calc(var(--ab,0px) + env(safe-area-inset-bottom,0px) + 18px);z-index:60;white-space:nowrap;display:flex;align-items:center;transition:bottom .6s cubic-bezier(.2,1.2,.3,1);border:0;border-radius:99px;padding:12px 18px;background:var(--ink);color:var(--gold2);font:700 15px 'DM Sans',sans-serif;box-shadow:0 0 0 1px rgba(232,200,114,.5)}
 .cartbtn b{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:99px;background:var(--g);color:#2A1D05;font-size:13px;margin-left:6px;padding:0 6px}
-.cartbtn.bump{animation:bmp .5s}
-@keyframes bmp{40%{transform:scale(1.14);box-shadow:0 0 28px rgba(232,200,114,.9)}}
+.cartbtn #ct{margin-left:8px;font-weight:600;opacity:.85}.cartbtn #ct:empty{display:none}.cartbtn.bump{animation:bmp .55s cubic-bezier(.2,1.6,.4,1)}.ring{position:fixed;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:2px solid var(--gold2);z-index:10002;pointer-events:none}
+@keyframes bmp{35%{transform:scale(1.22) rotate(-3deg);box-shadow:0 0 28px rgba(232,200,114,.9)}}
 .add{font:700 13px 'DM Sans',sans-serif;padding:9px 16px;border-radius:99px;border:0;background:var(--ink);color:#fff}
 .add.ok{background:var(--g);color:#2A1D05}
-.dot{position:fixed;width:14px;height:14px;border-radius:50%;background:var(--g);box-shadow:0 0 16px 4px rgba(232,200,114,.8);z-index:10001;pointer-events:none;transition:transform .7s cubic-bezier(.5,0,.8,.4),opacity .7s}
+.dot{position:fixed;width:14px;height:14px;border-radius:50%;background:var(--g);box-shadow:0 0 16px 4px rgba(232,200,114,.8);z-index:10001;pointer-events:none;}
 #cv{position:fixed;inset:0;z-index:10000;background:rgba(27,23,16,.4);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s}
 #cv.on{opacity:1;pointer-events:auto}
 #dr{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:rgba(255,255,255,.96);z-index:10001;transform:translateX(105%);transition:transform .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;box-shadow:-30px 0 80px -20px rgba(0,0,0,.4),inset 1px 0 0 var(--gold2);padding-top:env(safe-area-inset-top,0px)}
@@ -156,8 +156,17 @@ footer a{color:var(--gold);font-weight:700;text-decoration:none}
 .fd{margin-bottom:12px;font-size:14px;color:var(--mute)}.fd b{color:var(--ink)}.fd i{display:block;height:6px;border-radius:9px;background:var(--line);margin-top:8px;overflow:hidden}.fd i u{display:block;height:100%;background:var(--g);transition:width .5s;box-shadow:0 0 10px rgba(232,200,114,.9)}
 #cf .btn{display:block;text-align:center;width:100%;border:0}
 </style>
+<style id="stars">
+.stars{display:flex;gap:6px;margin-top:12px;font-size:36px;line-height:1;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 8px rgba(232,200,114,.55))}
+.stars span{display:inline-block;opacity:0;transform:scale(.2) rotate(-40deg)}
+.rv.in .stars span{animation:st .6s cubic-bezier(.2,1.6,.4,1) forwards}
+.rv.in .stars span:nth-child(2){animation-delay:.1s}.rv.in .stars span:nth-child(3){animation-delay:.2s}.rv.in .stars span:nth-child(4){animation-delay:.3s}.rv.in .stars span:nth-child(5){animation-delay:.4s}
+@keyframes st{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.stars span{opacity:1;transform:none;animation:none!important}}
+</style>
 </head>
 <body>
+<button class="cartbtn" id="cb" aria-label="Open cart">Cart <b id="cn">0</b><span id="ct"></span></button>
 <div id="cv"></div><aside id="dr" aria-label="Cart"><header><h3>Your cart</h3><button id="cx" aria-label="Close cart">×</button></header><div id="ci"></div>
 <div id="cf"><input id="nm" placeholder="Your name" autocomplete="name"><input id="nt" placeholder="Phone model and colour, for covers"><div class="fu"><button type="button" aria-pressed="true" data-f="Pick up in store">Pick up in store</button><button type="button" aria-pressed="false" data-f="Delivery">Delivery</button></div>
 <input id="da" placeholder="Delivery address or landmark" style="display:none"><div class="fd" id="fd"></div><div class="tot"><span>Total</span><span id="tt">₹0</span></div><small>“From” prices are the starting price. We confirm the final amount on WhatsApp before you pay.</small><a class="btn" id="wo" href="#" target="_blank" rel="noopener">Send order on WhatsApp</a></div></aside>
@@ -166,7 +175,7 @@ footer a{color:var(--gold);font-weight:700;text-decoration:none}
 <div id="pal" role="dialog" aria-label="Quick menu"><div class="box"><input id="pi" placeholder="Where to? Try: repair, covers, call" autocomplete="off"><ul id="pl"></ul></div></div>
 <nav><div class="wrap"><a class="logo" href="#top"><i></i>ARK Telecom</a>
 <ul><li><a href="#shop">Shop</a></li><li><a href="#covers">Covers</a></li><li><a href="#repair">Repairs</a></li><li><a href="#visit">Visit</a></li></ul>
-<div class="nr"><button class="cartbtn" id="cb" aria-label="Open cart">Cart <b id="cn">0</b></button><a class="btn" href="https://wa.me/919000633395">WhatsApp</a></div></div></nav>
+<a class="btn" href="https://wa.me/919000633395">WhatsApp</a></div></nav>
 
 <header class="wrap hero" id="top">
 <div><h1><span><b>Accessories</b></span><span><b>worth showing</b></span><span><b>off.</b></span></h1>
@@ -204,7 +213,7 @@ footer a{color:var(--gold);font-weight:700;text-decoration:none}
 <div><p id="n" style="color:var(--mute);margin-bottom:18px"></p><a class="btn" href="https://wa.me/919000633395?text=Hi%20ARK%20Telecom%2C%20I%20need%20a%20phone%20repair%3A%20">Ask on WhatsApp</a></div></div>
 </div></div></section>
 
-<section style="padding-top:0"><div class="wrap rev rv"><div class="n">5.0</div><div><blockquote>Came in to repair a phone and found the service and accessories under one roof. Great hospitality too.</blockquote><small>Akbar Ali Khan, Google Local Guide</small></div></div></section>
+<section style="padding-top:0"><div class="wrap rev rv"><div><div class="n">5.0</div><div class="stars" role="img" aria-label="5 out of 5 stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div></div><div><blockquote>Came in to repair a phone and found the service and accessories under one roof. Great hospitality too.</blockquote><small>Akbar Ali Khan, Google Local Guide</small></div></div></section>
 
 <section id="visit" style="padding-top:0"><div class="wrap visit">
 <div class="rv"><a class="big2" href="tel:+919000633395">90006 33395</a><a class="big2" href="tel:+919885111338" style="color:var(--mute)">98851 11338</a></div>
@@ -298,7 +307,7 @@ let ful='Pick up in store';
 function save(){try{localStorage.setItem(KEY,JSON.stringify(cart))}catch(e){}}
 function draw(){
 const n=cart.reduce((a,c)=>a+c.q,0),tot=cart.reduce((a,c)=>a+c.q*c.p,0);
-$('cn').textContent=n;$('tt').textContent=inr(tot);
+$('cn').textContent=n;$('ct').textContent=n?inr(tot):'';$('tt').textContent=inr(tot);
 $('cf').classList.toggle('on',n>0);
 $('ci').innerHTML=n?cart.map((c,i)=>'<div class="ln"><b>'+c.n+'</b><b>'+inr(c.p*c.q)+'</b><span>'+inr(c.p)+' each</span><span></span><div class="q"><button data-a="-" data-i="'+i+'" aria-label="Less">−</button><b>'+c.q+'</b><button data-a="+" data-i="'+i+'" aria-label="More">+</button><button class="rm" data-a="x" data-i="'+i+'">Remove</button></div></div>').join(''):'<div class="emp">Your cart is empty.<br>Add something from the shop.</div>';
 const FREE=219,left=FREE+1-tot,free=tot>FREE,pct=Math.min(100,tot/(FREE+1)*100),del=ful==='Delivery';
@@ -322,12 +331,17 @@ let id=b.dataset.id,name=b.dataset.name,price=+b.dataset.price;
 if(b.dataset.sel){const s=$('cvs');price=+s.value;name=s.options[s.selectedIndex].text.replace(/ ₹.*/,'')+' phone cover';id='cover'+price}
 const f=cart.find(c=>c.id===id);if(f)f.q++;else cart.push({id,n:name,p:price,q:1});save();draw();
 b.classList.add('ok');const t=b.textContent;b.textContent='Added ✓';setTimeout(()=>{b.classList.remove('ok');b.textContent=t},1200);
-const cb=$('cb'),r=b.getBoundingClientRect(),c=cb.getBoundingClientRect(),d=document.createElement('i');d.className='dot';
-d.style.left=r.left+r.width/2+'px';d.style.top=r.top+'px';document.body.appendChild(d);
-requestAnimationFrame(()=>{d.style.transform='translate('+(c.left+c.width/2-r.left-r.width/2)+'px,'+(c.top+c.height/2-r.top)+'px) scale(.3)';d.style.opacity='.2'});
-setTimeout(()=>{d.remove();cb.classList.remove('bump');void cb.offsetWidth;cb.classList.add('bump')},700);
-if(navigator.vibrate)navigator.vibrate(20)}));
+const cb=$('cb'),r=b.getBoundingClientRect(),c=cb.getBoundingClientRect();
+const sx=r.left+r.width/2,sy=r.top+r.height/2,ex=c.left+c.width/2,ey=c.top+c.height/2,mx=(sx+ex)/2,my=Math.min(sy,ey)-90;
+for(let k=0;k<7;k++){const d=document.createElement('i');d.className='dot';const z=14-k*1.6;d.style.cssText='width:'+z+'px;height:'+z+'px;margin:'+(-z/2)+'px 0 0 '+(-z/2)+'px;left:0;top:0;opacity:0';document.body.appendChild(d);
+const an=d.animate([{transform:'translate('+sx+'px,'+sy+'px) scale(1)',opacity:1},{transform:'translate('+mx+'px,'+my+'px) scale(1.2)',opacity:1,offset:.45},{transform:'translate('+ex+'px,'+ey+'px) scale(.3)',opacity:.3}],{duration:650,delay:k*38,easing:'cubic-bezier(.5,0,.3,1)',fill:'both'});
+an.onfinish=()=>{d.remove();if(k===0){cb.classList.remove('bump');void cb.offsetWidth;cb.classList.add('bump');const g=document.createElement('i');g.className='ring';g.style.left=ex+'px';g.style.top=ey+'px';document.body.appendChild(g);g.animate([{transform:'scale(.6)',opacity:1},{transform:'scale(3.2)',opacity:0}],{duration:600,easing:'ease-out'}).onfinish=()=>g.remove()}}}
+whoosh();if(navigator.vibrate)navigator.vibrate(20)}));
+function whoosh(){try{if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const A=window.AudioContext||window.webkitAudioContext;if(!A)return;const c=new A(),n=Math.floor(c.sampleRate*.3),buf=c.createBuffer(1,n,c.sampleRate),d=buf.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);const src=c.createBufferSource();src.buffer=buf;const f=c.createBiquadFilter();f.type='bandpass';f.Q.value=2;f.frequency.setValueAtTime(300,c.currentTime);f.frequency.exponentialRampToValueAtTime(3200,c.currentTime+.28);const g=c.createGain();g.gain.value=.06;src.connect(f);f.connect(g);g.connect(c.destination);src.start();setTimeout(()=>c.close(),500)}catch(e){}}
 draw();
+const ad=document.getElementById('ad'),rt=document.documentElement;
+function lift(){if(ad&&ad.classList.contains('on')){const r=ad.getBoundingClientRect();rt.style.setProperty('--ab',Math.max(0,innerHeight-r.top+10)+'px')}else rt.style.setProperty('--ab','0px')}
+if(ad){new MutationObserver(()=>setTimeout(lift,60)).observe(ad,{attributes:true,attributeFilter:['class']});addEventListener('resize',lift);ad.addEventListener('transitionend',lift);setInterval(lift,1500)}
 })();
 </script>
 </body>
